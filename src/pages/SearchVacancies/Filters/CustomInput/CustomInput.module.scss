@@ -5,10 +5,25 @@
 }
 .arrowTop {
   transform: rotate(180deg);
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  stroke-width: 2.5;
+  &:hover {
+    > path {
+      stroke: #5e96fc;
+    }
+  }
 }
 .arrowBottom {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  stroke-width: 2.5;
+
+  &:hover {
+    > path {
+      stroke: #5e96fc;
+    }
+  }
 }

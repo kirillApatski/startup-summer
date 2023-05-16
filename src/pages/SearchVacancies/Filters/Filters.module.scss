@@ -1,9 +1,13 @@
 .filtersWrapper {
+  margin: 0 auto;
   padding: 19px;
   width: 315px;
   background: #ffffff;
   border: 1px solid #eaebed;
   border-radius: 12px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
   .filtersHeader {
     display: flex;
     align-items: center;
@@ -22,6 +26,9 @@
       font-weight: 500;
       & :hover {
         color: #5e96fc;
+        line {
+          stroke: #5e96fc;
+        }
       }
     }
   }
@@ -37,6 +44,9 @@
       border-radius: 8px;
       margin-bottom: 8px;
       height: 42px;
+      &:hover {
+        border: 1px solid #5e96fc;
+      }
     }
   }
   .buttonApply {
