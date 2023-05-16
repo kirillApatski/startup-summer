@@ -1,0 +1,17 @@
+.input {
+  display: flex;
+  align-items: center;
+
+  input {
+    height: 48px;
+    border: 1px solid #eaebed;
+    border-radius: 8px;
+    &:hover {
+      border: 1px solid #5e96fc;
+    }
+  }
+  .searchButton {
+    background: #5e96fc;
+    border-radius: 8px;
+  }
+}
