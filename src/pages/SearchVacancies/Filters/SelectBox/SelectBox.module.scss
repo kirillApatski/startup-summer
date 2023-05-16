@@ -1,0 +1,11 @@
+.select {
+  margin-bottom: 20px;
+  input {
+    border: 1px solid #d5d6dc;
+    border-radius: 8px;
+    height: 42px;
+    &:hover {
+      border: 1px solid #5e96fc;
+    }
+  }
+}
