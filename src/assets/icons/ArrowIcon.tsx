@@ -2,13 +2,15 @@ import React, { FC } from 'react'
 
 type ArrowIconProps = {
   className?: string
+  collBak?: () => void
 }
 
-export const ArrowIcon: FC<ArrowIconProps> = ({ className }) => {
+export const ArrowIcon: FC<ArrowIconProps> = ({ className, collBak }) => {
   const finishStyle = className ? className : ''
 
   return (
     <svg
+      onClick={collBak}
       className={finishStyle}
       width='24'
       height='24'
