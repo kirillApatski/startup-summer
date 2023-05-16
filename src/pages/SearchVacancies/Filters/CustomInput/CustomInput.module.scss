@@ -1,0 +1,14 @@
+.arrowBox {
+  display: flex;
+  flex-direction: column;
+  margin-right: 12px;
+}
+.arrowTop {
+  transform: rotate(180deg);
+  width: 12px;
+  height: 12px;
+}
+.arrowBottom {
+  width: 12px;
+  height: 12px;
+}
