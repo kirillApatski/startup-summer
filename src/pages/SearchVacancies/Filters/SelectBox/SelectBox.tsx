@@ -34,12 +34,14 @@ const data = [
 export const SelectBox = () => {
   return (
     <Select
+      data-elem='industry-select'
       className={styles.select}
       placeholder='Выберете отрасль'
+      styles={{ rightSection: { pointerEvents: 'none' } }}
       data={data}
-      searchable
-      rightSectionWidth={36}
+      // searchable
       rightSection={<ArrowIcon />}
+      rightSectionWidth={36}
     />
   )
 }
