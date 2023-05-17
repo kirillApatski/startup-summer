@@ -1,7 +1,8 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { authApi } from 'api/authApi'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { authApi, AuthResponseType } from 'api/authApi'
 import { setIsInitialized } from 'store/slices/appSlice'
 import { setDataToLocalStorage } from 'utils/localStorage'
+import { createAppAsyncThunk } from 'utils/create-app-async-thunk'
 
 const initState = {
   access_token: '',
@@ -10,25 +11,45 @@ const initState = {
   token_type: '',
   expires_in: 0
 }
-export const authMe = createAsyncThunk('auth/authMe', async (_, thunkAPI) => {
+export const authMe = createAppAsyncThunk('auth/authMe', async (_, { dispatch, rejectWithValue, getState }) => {
   try {
-    const res = await authApi.passwordAuth()
-    setAuthData(res.data)
-    setDataToLocalStorage('auth', JSON.stringify(res.data))
+    const accessToken = getState().auth.access_token
+    const refreshToken = getState().auth.refresh_token
+    const ttl = getState().auth.ttl
+    if (!accessToken) {
+      const res = await authApi.passwordAuth()
+      dispatch(setAuthData(res.data))
+      setDataToLocalStorage('auth', JSON.stringify(res.data))
+    } else if (ttl / 1000 < Date.now()) {
+      dispatch(setIsInitialized({ isInitialized: true }))
+      dispatch(authRefreshToken(refreshToken))
+    }
   } catch (error) {
-    thunkAPI.rejectWithValue(error)
+    return rejectWithValue(error)
   } finally {
-    thunkAPI.dispatch(setIsInitialized({ isInitialized: false }))
+    dispatch(setIsInitialized({ isInitialized: false }))
   }
 })
+
+export const authRefreshToken = createAppAsyncThunk(
+  'auth/authRefreshToken',
+  async (refreshToken: string, { dispatch, rejectWithValue }) => {
+    try {
+      const res = await authApi.refreshToken(refreshToken)
+      dispatch(setAuthData(res.data))
+    } catch (error) {
+      return rejectWithValue(error)
+    } finally {
+      dispatch(setIsInitialized({ isInitialized: false }))
+    }
+  }
+)
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: initState,
   reducers: {
-    setAuthData(state, action: PayloadAction<any>) {
-      debugger
-
+    setAuthData(state, action: PayloadAction<AuthResponseType>) {
       state.access_token = action.payload.access_token
       state.ttl = action.payload.ttl
       state.refresh_token = action.payload.refresh_token

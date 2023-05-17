@@ -11,6 +11,15 @@ export const authApi = {
         hr: process.env.REACT_APP_HR
       }
     })
+  },
+  refreshToken(refreshToken: string) {
+    return instance.get('oauth2/refresh_token', {
+      params: {
+        client_id: process.env.REACT_APP_CLIENT_ID,
+        client_secret: process.env.REACT_APP_APP_ID,
+        refresh_token: refreshToken
+      }
+    })
   }
 }
 
