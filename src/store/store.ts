@@ -2,10 +2,14 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { authReducer } from 'store/slices/authSlice'
 import thunkMiddleware from 'redux-thunk'
 import { appReducer } from 'store/slices/appSlice'
+import { vacanciesReducer } from 'store/slices/vacanciesSlice'
+import { cataloguesReducer } from 'store/slices/cataloguesSlice'
 
 const rootReducer = combineReducers({
   app: appReducer,
-  auth: authReducer
+  auth: authReducer,
+  vacancies: vacanciesReducer,
+  catalogues: cataloguesReducer
 })
 
 export const store = configureStore({
