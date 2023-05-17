@@ -1,0 +1,13 @@
+@import 'src/styles/variables/variables';
+
+.select {
+  margin-bottom: 20px;
+  input {
+    border: 1px solid $borderColor;
+    border-radius: 8px;
+    height: 42px;
+    &:hover {
+      border: 1px solid $blueColor;
+    }
+  }
+}

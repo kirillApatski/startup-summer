@@ -1,3 +1,4 @@
+@import 'src/styles/variables/variables';
 .arrowBox {
   display: flex;
   flex-direction: column;
@@ -11,7 +12,7 @@
   stroke-width: 2.5;
   &:hover {
     > path {
-      stroke: #5e96fc;
+      stroke: $blueColor;
     }
   }
 }
@@ -23,7 +24,7 @@
 
   &:hover {
     > path {
-      stroke: #5e96fc;
+      stroke: $blueColor;
     }
   }
 }

@@ -1,3 +1,4 @@
+@import 'src/styles/variables/variables';
 .header {
   background-color: #fff;
   .headerWrapper {
@@ -38,7 +39,7 @@
           }
           .active {
             font-weight: 500;
-            color: #5e96fc;
+            color: $blueColor;
           }
         }
       }

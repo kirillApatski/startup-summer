@@ -1,17 +1,19 @@
+@import 'src/styles/variables/variables';
+
 .input {
   display: flex;
   align-items: center;
 
   input {
     height: 48px;
-    border: 1px solid #eaebed;
+    border: 1px solid $borderColor;
     border-radius: 8px;
     &:hover {
-      border: 1px solid #5e96fc;
+      border: 1px solid $blueColor;
     }
   }
   .searchButton {
-    background: #5e96fc;
+    background: $blueColor;
     border-radius: 8px;
   }
 }

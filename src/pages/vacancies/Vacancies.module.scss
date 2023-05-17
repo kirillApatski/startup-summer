@@ -8,5 +8,9 @@
   .searchBoard {
     max-width: 773px;
     width: 100%;
+    .pagination {
+      justify-content: center;
+      margin-top: 40px;
+    }
   }
 }
