@@ -1,10 +1,14 @@
+@import 'src/styles/variables/variables';
+
 .filtersWrapper {
+  height: 100%;
+  width: 315px;
   margin: 0 auto;
   padding: 19px;
-  width: 315px;
-  background: #ffffff;
-  border: 1px solid #eaebed;
+  background: $bgSecondColor;
+  border: 1px solid $borderColor;
   border-radius: 12px;
+
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -21,13 +25,13 @@
     .filterClose {
       padding: 0;
       background-color: transparent;
-      color: #acadb9;
+      color: $greyColor;
       font-size: 14px;
       font-weight: 500;
       & :hover {
-        color: #5e96fc;
+        color: $blueColor;
         line {
-          stroke: #5e96fc;
+          stroke: $blueColor;
         }
       }
     }
@@ -40,12 +44,12 @@
   }
   .inputNumber {
     input {
-      border: 1px solid #d5d6dc;
+      border: 1px solid $borderColor;
       border-radius: 8px;
       margin-bottom: 8px;
       height: 42px;
       &:hover {
-        border: 1px solid #5e96fc;
+        border: 1px solid $blueColor;
       }
     }
   }

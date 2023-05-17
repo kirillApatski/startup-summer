@@ -3,8 +3,8 @@ import { Button } from '@mantine/core'
 
 import styles from './Filters.module.scss'
 import { CloseIcon } from 'assets/icons/CloseIcon'
-import { SelectBox } from 'pages/SearchVacancies/Filters/SelectBox/SelectBox'
-import { CustomInput } from 'pages/SearchVacancies/Filters/CustomInput/CustomInput'
+import { SelectBox } from 'pages/vacancies/Filters/SelectBox/SelectBox'
+import { CustomInput } from 'pages/vacancies/Filters/CustomInput/CustomInput'
 
 export const Filters = () => {
   return (
