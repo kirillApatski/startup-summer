@@ -1,25 +1,19 @@
 import { instance } from 'api/instance/instance'
 
 export const vacanciesApi = {
-  getVacancies(page: number) {
-    return instance.get<VacanciesResponseType>('vacancies', {
-      params: {
-        page,
-        count: 4
-      }
-    })
+  getVacancies(params: { count: number } & Partial<FilterAndSearchType>) {
+    return instance.get<VacanciesResponseType>('vacancies', { params })
   }
 }
 
 export type FilterAndSearchType = {
   count: number
-  filterAndSearch: {
-    published: number
-    keyword?: string | null
-    payment_from?: number | null
-    payment_to?: number | null
-    catalogues?: number | null
-  }
+  published: number | null
+  page: null | number
+  keyword: string | null | undefined
+  payment_from: number | null
+  payment_to: number | null
+  catalogues: number | null
 }
 
 export type VacanciesResponseType = {
