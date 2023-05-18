@@ -8,8 +8,8 @@ export const JobBoard = () => {
   const dispatch = useAppDispatch()
   const vacancies = useAppSelector(getVacanciesState)
   useEffect(() => {
-    dispatch(getVacancies(1))
-  }, [])
+    dispatch(getVacancies())
+  }, [dispatch])
   return (
     <>
       {vacancies.map(vacancy => {
