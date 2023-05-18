@@ -12,7 +12,7 @@ export const App = () => {
   const isInitialized = useAppSelector(getIsInitialized)
   useEffect(() => {
     dispatch(authMe())
-  }, [])
+  }, [dispatch])
   if (isInitialized) {
     return <AppLoader />
   }
