@@ -6,10 +6,16 @@ import styles from './CustomInput.module.scss'
 type CustomInputProps = {
   placeholder: string
   customStyle: string
+  value: number
+  onChange: (salary: number) => void
 }
 
-export const CustomInput: FC<CustomInputProps> = ({ placeholder, customStyle }) => {
+export const CustomInput: FC<CustomInputProps> = ({ placeholder, customStyle, onChange, value }) => {
   const handlers = useRef<NumberInputHandlers>()
+
+  const onChangeHandler = (inputValue: number) => {
+    onChange(inputValue)
+  }
 
   const incrementHandler = () => {
     handlers.current?.increment()
@@ -21,9 +27,12 @@ export const CustomInput: FC<CustomInputProps> = ({ placeholder, customStyle }) 
   return (
     <NumberInput
       type='number'
+      value={value ? value : ''}
       className={customStyle}
       placeholder={placeholder}
       handlersRef={handlers}
+      step={500}
+      onChange={onChangeHandler}
       rightSection={<ArrowBox increment={incrementHandler} decrement={decrementHandler} />}
     />
   )

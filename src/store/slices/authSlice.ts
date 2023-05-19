@@ -11,16 +11,17 @@ const initState = {
   token_type: '',
   expires_in: 0
 }
-export const authMe = createAppAsyncThunk('auth/authMe', async (_, { dispatch, rejectWithValue, getState }) => {
+const accessToken = localStorage.getItem('auth') && JSON.parse(localStorage.getItem('auth') || '').access_token
+const refreshToken = localStorage.getItem('auth') && JSON.parse(localStorage.getItem('auth') || '').refresh_token
+const ttl = localStorage.getItem('auth') && JSON.parse(localStorage.getItem('auth') || '').ttl
+
+export const authMe = createAppAsyncThunk('auth/authMe', async (_, { dispatch, rejectWithValue }) => {
   try {
-    const accessToken = getState().auth.access_token
-    const refreshToken = getState().auth.refresh_token
-    const ttl = getState().auth.ttl
     if (!accessToken) {
       const res = await authApi.passwordAuth()
       dispatch(setAuthData(res.data))
       setDataToLocalStorage('auth', JSON.stringify(res.data))
-    } else if (ttl / 1000 < Date.now()) {
+    } else if (ttl * 1000 < Date.now()) {
       dispatch(setIsInitialized({ isInitialized: true }))
       dispatch(authRefreshToken(refreshToken))
     }

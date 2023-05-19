@@ -11,7 +11,7 @@ type AppPaginationType = {
 const AppPagination: FC<AppPaginationType> = ({ className, total }) => {
   const dispatch = useAppDispatch()
 
-  const currentPage = useAppSelector(state => state.vacancies.page)
+  const currentPage = useAppSelector(state => state.vacancies.pagination.page)
 
   const pageQuantity = Math.ceil((total > 500 ? 500 : total) / 4)
 
