@@ -3,14 +3,15 @@ import { Button, Input } from '@mantine/core'
 import { SearchIcon } from 'assets/icons/SearchIcon'
 import styles from './SearchInput.module.scss'
 import { useAppDispatch } from 'common/hooks/hooks'
-import { getVacancies, setFilters } from 'store/slices/vacanciesSlice'
+import { getVacancies, setPage, setSearchVacancies } from 'store/slices/vacanciesSlice'
 
 export const SearchInput = () => {
   const dispatch = useAppDispatch()
   const [inputValue, setInputValue] = useState('')
 
   const onSearchVacancies = () => {
-    dispatch(setFilters({ keyword: inputValue }))
+    dispatch(setSearchVacancies({ keyword: inputValue }))
+    dispatch(setPage(0))
     dispatch(getVacancies())
   }
 
@@ -22,6 +23,7 @@ export const SearchInput = () => {
   }
   return (
     <Input
+      data-elem='search-input'
       className={styles.input}
       value={inputValue}
       onChange={onChangeHandler}
@@ -31,7 +33,7 @@ export const SearchInput = () => {
       size={'md'}
       rightSectionWidth={105}
       rightSection={
-        <Button className={styles.searchButton} onClick={onSearchVacancies}>
+        <Button data-elem='search-button' className={styles.searchButton} onClick={onSearchVacancies}>
           Поиск
         </Button>
       }
