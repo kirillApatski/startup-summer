@@ -7,13 +7,26 @@ export const vacanciesApi = {
 }
 
 export type FilterAndSearchType = {
-  count: number
+  filters: FiltersType
+  pagination: PaginationType
+  search: SearchVacanciesType
   published: number | null
-  page: null | number
-  keyword: string | null | undefined
+}
+
+export type FiltersType = {
+  no_agreement: number | null
   payment_from: number | null
   payment_to: number | null
   catalogues: number | null
+}
+
+export type SearchVacanciesType = {
+  keyword: string | null
+}
+
+export type PaginationType = {
+  count: number
+  page: null | number
 }
 
 export type VacanciesResponseType = {
@@ -36,4 +49,5 @@ export type VacancyType = {
     id: number
     title: string
   }
+  vacancyRichText: string
 }

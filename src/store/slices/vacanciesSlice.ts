@@ -1,30 +1,44 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { createAppAsyncThunk } from 'utils/create-app-async-thunk'
-import { FilterAndSearchType, vacanciesApi, VacanciesResponseType } from 'api/vacanciesApi'
+import {
+  FilterAndSearchType,
+  FiltersType,
+  SearchVacanciesType,
+  vacanciesApi,
+  VacanciesResponseType
+} from 'api/vacanciesApi'
 
 const initialState: VacanciesResponseType & FilterAndSearchType = {
   objects: [],
   total: 0,
-  count: 4,
   published: 1,
-  page: null,
-  keyword: null,
-  payment_from: null,
-  payment_to: null,
-  catalogues: null
+  filters: {
+    no_agreement: null,
+    payment_from: null,
+    payment_to: null,
+    catalogues: null
+  },
+  pagination: {
+    count: 4,
+    page: null
+  },
+  search: {
+    keyword: null
+  }
 }
 
 export const getVacancies = createAppAsyncThunk('vacancies/getVacancies', async (_, { rejectWithValue, getState }) => {
   try {
-    const { count, published, page, keyword, payment_to, payment_from, catalogues } = getState().vacancies
+    const filters = getState().vacancies.filters
+    const pagination = getState().vacancies.pagination
+    const search = getState().vacancies.search
+    const published = getState().vacancies.published
+
     const res = await vacanciesApi.getVacancies({
-      count,
-      page,
-      published,
-      keyword,
-      payment_to,
-      payment_from,
-      catalogues
+      ...search,
+      ...filters,
+      ...pagination,
+      published
     })
     return res.data
   } catch (error) {
@@ -37,10 +51,23 @@ const vacanciesSlice = createSlice({
   initialState,
   reducers: {
     setPage(state, action: PayloadAction<number>) {
-      state.page = action.payload
+      state.pagination.page = action.payload
     },
-    setFilters(state, action: PayloadAction<Partial<FilterAndSearchType>>) {
-      state.keyword = action.payload.keyword
+    setSearchVacancies(state, action: PayloadAction<SearchVacanciesType>) {
+      state.search.keyword = action.payload.keyword
+    },
+    setFilters(state, action: PayloadAction<FiltersType>) {
+      state.filters.catalogues = action.payload.catalogues
+      state.filters.payment_from = action.payload.payment_from
+      state.filters.payment_to = action.payload.payment_to
+      state.filters.no_agreement = action.payload.no_agreement
+    },
+    resetFilters(state) {
+      state.filters.payment_to = null
+      state.filters.payment_from = null
+      state.filters.catalogues = null
+      state.search.keyword = null
+      state.filters.no_agreement = null
     }
   },
   extraReducers: builder => {
@@ -52,4 +79,4 @@ const vacanciesSlice = createSlice({
 })
 
 export const vacanciesReducer = vacanciesSlice.reducer
-export const { setPage, setFilters } = vacanciesSlice.actions
+export const { setPage, setFilters, setSearchVacancies, resetFilters } = vacanciesSlice.actions
