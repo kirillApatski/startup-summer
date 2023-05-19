@@ -11,8 +11,8 @@ export const Pages = () => {
       <Routes>
         <Route path={'/'} element={<Vacancies />} />
         <Route path={PATH.SEARCH_VACANCIES} element={<Vacancies />} />
+        <Route path={`${PATH.SEARCH_VACANCIES}/:id`} element={<VacancyDetails />} />
         <Route path={PATH.FAVORITE} element={<Favorite />} />
-        <Route path={`${PATH.VACANCY_DETAILS}/:id`} element={<VacancyDetails />} />
         <Route path='*' element={<Navigate to={PATH.SEARCH_VACANCIES} />} />
       </Routes>
     </div>
