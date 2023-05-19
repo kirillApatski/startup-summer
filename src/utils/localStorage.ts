@@ -8,6 +8,14 @@ const setDataToLocalStorage = (key: LocalStorageKey, value: string): void => {
   }
 }
 
+export const getDataToLocalStorage = (key: LocalStorageKey) => {
+  try {
+    return JSON.parse(localStorage.getItem(key) || '')
+  } catch {
+    return
+  }
+}
+
 const removeDataFromLocalStorage = (key: LocalStorageKey): void => {
   try {
     localStorage.removeItem(key)
