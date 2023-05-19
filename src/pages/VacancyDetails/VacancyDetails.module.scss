@@ -1,0 +1,59 @@
+@import 'src/styles/variables/variables';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  .vacancyWrapper {
+    display: flex;
+    justify-content: space-between;
+    max-width: 773px;
+    width: 100%;
+    padding: 24px;
+    background: $bgSecondColor;
+    border: 1px solid $borderColor;
+    border-radius: 12px;
+    .descriptionVacancy {
+      .title {
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 34px;
+        color: $blackColor;
+        margin-bottom: 16px;
+      }
+      .descriptionWork {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        .salary {
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 20px;
+          margin-right: 16px;
+        }
+        .timeWork {
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 20px;
+          margin-left: 12px;
+        }
+      }
+      .city {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 140%;
+      }
+    }
+    .star {
+      background: transparent;
+      &:hover {
+        > svg > path {
+          stroke: $blueColor;
+        }
+      }
+    }
+  }
+}
