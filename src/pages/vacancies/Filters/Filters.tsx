@@ -15,7 +15,7 @@ export const Filters = () => {
     payment_from: null,
     payment_to: null,
     catalogues: null,
-    no_agreement: 1
+    no_agreement: null
   })
   const applyAFilters = () => {
     dispatch(setFilters(filtersVacancies))
@@ -27,7 +27,7 @@ export const Filters = () => {
       payment_from: null,
       payment_to: null,
       catalogues: null,
-      no_agreement: null
+      no_agreement: 0
     })
     dispatch(getVacancies())
   }
@@ -57,6 +57,8 @@ export const Filters = () => {
         customStyle={styles.inputNumber}
         placeholder='От'
         onChange={onChangeSalaryFromHandler}
+        step={500}
+        min={0}
       />
       <CustomInput
         data-elem='salary-to-input'
@@ -64,6 +66,8 @@ export const Filters = () => {
         customStyle={styles.inputNumber}
         placeholder='До'
         onChange={onChangeSalaryToHandler}
+        step={500}
+        min={filtersVacancies.payment_from ? Number(filtersVacancies.payment_from) : 500}
       />
       <Button data-elem='search-button' className={styles.buttonApply} onClick={applyAFilters}>
         Применить
