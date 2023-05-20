@@ -8,9 +8,11 @@ type CustomInputProps = {
   customStyle: string
   value: number
   onChange: (salary: number) => void
+  step: number
+  min: number
 }
 
-export const CustomInput: FC<CustomInputProps> = ({ placeholder, customStyle, onChange, value }) => {
+export const CustomInput: FC<CustomInputProps> = ({ placeholder, customStyle, onChange, value, min, step }) => {
   const handlers = useRef<NumberInputHandlers>()
 
   const onChangeHandler = (inputValue: number) => {
@@ -27,11 +29,13 @@ export const CustomInput: FC<CustomInputProps> = ({ placeholder, customStyle, on
   return (
     <NumberInput
       type='number'
+      hideControls
       value={value ? value : ''}
       className={customStyle}
       placeholder={placeholder}
       handlersRef={handlers}
-      step={500}
+      step={step}
+      min={min}
       onChange={onChangeHandler}
       rightSection={<ArrowBox increment={incrementHandler} decrement={decrementHandler} />}
     />
