@@ -2,8 +2,10 @@
 
 .wrapper {
   display: flex;
-  justify-content: center;
-  margin-top: 40px;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 51px;
   .vacancyWrapper {
     display: flex;
     justify-content: space-between;
@@ -55,5 +57,13 @@
         }
       }
     }
+  }
+  .vacancyDescription {
+    background: $bgSecondColor;
+    padding: 24px;
+    border: 1px solid #eaebed;
+    border-radius: 12px;
+    margin-top: 20px;
+    max-width: 773px;
   }
 }
