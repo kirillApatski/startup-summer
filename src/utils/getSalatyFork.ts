@@ -2,7 +2,7 @@ const SALARY_SUM = 0
 
 export const salaryFork = (payment_from: number, payment_to: number, currency: string) => {
   if (payment_from === SALARY_SUM && payment_to === SALARY_SUM) {
-    return 'з/п Договорная'
+    return ''
   }
   if (payment_from > SALARY_SUM && payment_to === SALARY_SUM) {
     return `з/п от ${payment_from} ${currency}`
