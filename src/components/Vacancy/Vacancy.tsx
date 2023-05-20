@@ -6,44 +6,37 @@ import { StarIcon } from 'assets/icons/StarIcon'
 import { NavLink } from 'react-router-dom'
 import { PATH } from 'common/enums/PATH'
 import { salaryFork } from 'utils/getSalatyFork'
+import { VacancyType } from 'api/vacanciesApi'
+import style from './Vacancy.module.scss'
 
 type VacancyPropsType = {
-  profession: string
-  payment_from: number
-  payment_to: number
-  type_of_work: { id: number; title: string }
-  town: { id: number; title: string }
-  currency: string
-  id: number
+  vacancy: VacancyType
   styles?: any
+  setItemToLocalStorage?: any
 }
 
-export const Vacancy: FC<VacancyPropsType> = ({
-  profession,
-  type_of_work,
-  town,
-  payment_to,
-  payment_from,
-  currency,
-  id,
-  styles
-}) => {
-  const salary = salaryFork(payment_from, payment_to, currency)
+export const Vacancy: FC<VacancyPropsType> = ({ styles, setItemToLocalStorage, vacancy }) => {
+  const salary = salaryFork(vacancy.payment_from, vacancy.payment_to, vacancy.currency)
+  const finishStyles = styles ? styles : style
   return (
-    <NavLink to={`${PATH.VACANCY_DETAILS}/${id}`} className={styles.vacancyWrapper}>
-      <div className={styles.descriptionVacancy}>
-        <h2 className={styles.title}>{profession}</h2>
-        <p className={styles.descriptionWork}>
-          <span className={styles.salary}>{salary}</span>
+    <NavLink to={`${PATH.VACANCY_DETAILS}/${vacancy.id}`} className={finishStyles.vacancyWrapper}>
+      <div className={finishStyles.descriptionVacancy}>
+        <h2 className={finishStyles.title}>{vacancy.profession}</h2>
+        <p className={finishStyles.descriptionWork}>
+          <span className={finishStyles.salary}>{salary}</span>
           <DotIcon />
-          <span className={styles.timeWork}>{type_of_work.title}</span>
+          <span className={finishStyles.timeWork}>{vacancy.type_of_work.title}</span>
         </p>
-        <p className={styles.city}>
+        <p className={finishStyles.city}>
           <LocationIcon />
-          <span>{town.title}</span>
+          <span>{vacancy.town.title}</span>
         </p>
       </div>
-      <ActionIcon data-elem={`vacancy-${id}-shortlist-button`} className={styles.star}>
+      <ActionIcon
+        onClick={e => setItemToLocalStorage(e, vacancy)}
+        data-elem={`vacancy-${vacancy.id}-shortlist-button`}
+        className={finishStyles.star}
+      >
         <StarIcon />
       </ActionIcon>
     </NavLink>
