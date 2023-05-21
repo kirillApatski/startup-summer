@@ -9,11 +9,14 @@
     border: 1px solid $borderColor;
     border-radius: 8px;
     &:hover {
-      border: 1px solid $blueColor;
+      border: 1px solid $hoverBlueColor;
     }
   }
   .searchButton {
     background: $blueColor;
     border-radius: 8px;
+    &:hover {
+      background-color: $hoverBlueColor;
+    }
   }
 }

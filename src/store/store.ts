@@ -4,12 +4,14 @@ import thunkMiddleware from 'redux-thunk'
 import { appReducer } from 'store/slices/appSlice'
 import { vacanciesReducer } from 'store/slices/vacanciesSlice'
 import { cataloguesReducer } from 'store/slices/cataloguesSlice'
+import { favoriteReducer } from 'store/slices/favoriteSlice'
 
 const rootReducer = combineReducers({
   app: appReducer,
   auth: authReducer,
   vacancies: vacanciesReducer,
-  catalogues: cataloguesReducer
+  catalogues: cataloguesReducer,
+  favorite: favoriteReducer
 })
 
 export const store = configureStore({
