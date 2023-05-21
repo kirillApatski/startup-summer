@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   gap: 28px;
-  padding: 40px 0 0 0;
+  padding: 40px 0;
   @media (max-width: 768px) {
     flex-wrap: wrap;
   }
