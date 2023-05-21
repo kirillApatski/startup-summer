@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, MouseEvent } from 'react'
 import { ActionIcon } from '@mantine/core'
 import { DotIcon } from 'assets/icons/DotIcon'
 import { LocationIcon } from 'assets/icons/LocationIcon'
@@ -8,14 +8,23 @@ import { PATH } from 'common/enums/PATH'
 import { salaryFork } from 'utils/getSalatyFork'
 import { VacancyType } from 'api/vacanciesApi'
 import style from './Vacancy.module.scss'
+import { setFavorite } from 'store/slices/favoriteSlice'
+import { useAppDispatch, useAppSelector } from 'common/hooks/hooks'
+import { getFavorite } from 'store/selectors/favoriteSelectors'
 
 type VacancyPropsType = {
   vacancy: VacancyType
   styles?: any
-  setItemToLocalStorage?: any
 }
 
-export const Vacancy: FC<VacancyPropsType> = ({ styles, setItemToLocalStorage, vacancy }) => {
+export const Vacancy: FC<VacancyPropsType> = ({ styles, vacancy }) => {
+  const dispatch = useAppDispatch()
+  const favoriteVacancy = useAppSelector(getFavorite).find(favorite => favorite.id === vacancy.id)?.id
+
+  const setFavoriteHandler = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    dispatch(setFavorite(vacancy))
+  }
   const salary = salaryFork(vacancy.payment_from, vacancy.payment_to, vacancy.currency)
   const finishStyles = styles ? styles : style
   return (
@@ -33,9 +42,11 @@ export const Vacancy: FC<VacancyPropsType> = ({ styles, setItemToLocalStorage, v
         </p>
       </div>
       <ActionIcon
-        onClick={e => setItemToLocalStorage(e, vacancy)}
+        onClick={e => setFavoriteHandler(e)}
         data-elem={`vacancy-${vacancy.id}-shortlist-button`}
-        className={finishStyles.star}
+        className={
+          favoriteVacancy === vacancy.id ? `${finishStyles.star} ${finishStyles.starActive}` : finishStyles.star
+        }
       >
         <StarIcon />
       </ActionIcon>
