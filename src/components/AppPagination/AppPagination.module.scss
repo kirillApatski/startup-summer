@@ -1,0 +1,9 @@
+@import 'src/styles/variables/variables';
+
+.pagination {
+  button[data-active] {
+    background: $blueColor;
+    border: 1px solid $greyColor300;
+    border-radius: 4px;
+  }
+}
