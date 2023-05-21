@@ -44,7 +44,7 @@ export const Filters = () => {
     <div className={styles.filtersWrapper}>
       <div className={styles.filtersHeader}>
         <h3 className={styles.title}>Фильтры</h3>
-        <Button className={styles.filterClose} compact rightIcon={<CloseIcon />} onClick={resetAFilters}>
+        <Button className={styles.filterReset} compact rightIcon={<CloseIcon />} onClick={resetAFilters}>
           Сбросить все
         </Button>
       </div>
