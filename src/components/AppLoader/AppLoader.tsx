@@ -1,11 +1,7 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { Loader } from '@mantine/core'
+import styles from './AppLoader.module.scss'
 
-type AppLoaderType = {
-  styles?: string
-}
-
-export const AppLoader: FC<AppLoaderType> = ({ styles }) => {
-  const finishStyles = styles ? styles : ''
-  return <Loader className={finishStyles} />
+export const AppLoader = () => {
+  return <Loader className={styles.loader} />
 }
