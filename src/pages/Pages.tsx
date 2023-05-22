@@ -10,7 +10,6 @@ export const Pages = () => {
   return (
     <div className='container'>
       <Routes>
-        <Route path={'/'} element={<Vacancies />} />
         <Route path={PATH.SEARCH_VACANCIES} element={<Vacancies />} />
         <Route path={`${PATH.SEARCH_VACANCIES}/:id`} element={<VacancyDetails />} />
         <Route path={PATH.FAVORITE} element={<Favorite />} />
