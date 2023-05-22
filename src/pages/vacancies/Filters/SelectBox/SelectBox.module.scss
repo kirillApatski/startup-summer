@@ -7,7 +7,15 @@
     border-radius: 8px;
     height: 42px;
     &:hover {
-      border: 1px solid $blueColor;
+      border: 1px solid $hoverBlueColor;
+    }
+    .item {
+      &:hover {
+        background-color: $hoverBlueColor;
+      }
+    }
+    .dropdown[data-selected] {
+      background-color: $blueColor;
     }
   }
 }
