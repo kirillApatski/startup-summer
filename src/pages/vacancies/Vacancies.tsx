@@ -9,9 +9,10 @@ import { getTotalCount } from 'store/selectors/VacanciesSelectors'
 
 export const Vacancies = () => {
   const totalCount = useAppSelector(getTotalCount)
+  const isLoading = useAppSelector(state => state.app.status === 'loading')
 
   return (
-    <div className={styles.wrapper}>
+    <div className={isLoading ? `${styles.wrapper} disable` : styles.wrapper}>
       <Filters />
       <div className={styles.searchBoard}>
         <SearchInput />
