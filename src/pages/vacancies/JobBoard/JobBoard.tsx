@@ -14,7 +14,7 @@ export const JobBoard = () => {
   return (
     <>
       {vacancies.map(vacancy => {
-        return <Vacancy key={vacancy.id} data-elem={`vacancy-_vacancy-${vacancy.id}`} vacancy={vacancy} />
+        return <Vacancy isLink={true} key={vacancy.id} data-elem={`vacancy-_vacancy-${vacancy.id}`} vacancy={vacancy} />
       })}
     </>
   )

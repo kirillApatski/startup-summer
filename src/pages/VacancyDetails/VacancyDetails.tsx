@@ -17,7 +17,7 @@ export const VacancyDetails = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Vacancy styles={styles} vacancy={vacancy!} />
+      <Vacancy isLink={false} styles={styles} vacancy={vacancy!} />
       <div className={styles.vacancyDescription} dangerouslySetInnerHTML={{ __html: vacancy!.vacancyRichText }}></div>
     </div>
   )
