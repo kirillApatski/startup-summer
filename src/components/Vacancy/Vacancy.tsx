@@ -3,32 +3,32 @@ import { ActionIcon } from '@mantine/core'
 import { DotIcon } from 'assets/icons/DotIcon'
 import { LocationIcon } from 'assets/icons/LocationIcon'
 import { StarIcon } from 'assets/icons/StarIcon'
-import { NavLink } from 'react-router-dom'
-import { PATH } from 'common/enums/PATH'
 import { salaryFork } from 'utils/getSalatyFork'
 import { VacancyType } from 'api/vacanciesApi'
 import style from './Vacancy.module.scss'
 import { setFavorite } from 'store/slices/favoriteSlice'
 import { useAppDispatch, useAppSelector } from 'common/hooks/hooks'
 import { getFavorite } from 'store/selectors/favoriteSelectors'
+import { NavLinkContainer } from 'common/hoc/NavLinkContainer'
 
 type VacancyPropsType = {
   vacancy: VacancyType
   styles?: any
+  isLink: boolean
 }
 
-export const Vacancy: FC<VacancyPropsType> = ({ styles, vacancy }) => {
+export const Vacancy: FC<VacancyPropsType> = ({ styles, vacancy, isLink }) => {
   const dispatch = useAppDispatch()
   const favoriteVacancy = useAppSelector(getFavorite).find(favorite => favorite.id === vacancy.id)?.id
 
-  const setFavoriteHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+  const setFavoriteHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
     dispatch(setFavorite(vacancy))
   }
   const salary = salaryFork(vacancy.payment_from, vacancy.payment_to, vacancy.currency)
   const finishStyles = styles ? styles : style
   return (
-    <NavLink to={`${PATH.VACANCY_DETAILS}/${vacancy.id}`} className={finishStyles.vacancyWrapper}>
+    <NavLinkContainer isLink={isLink} className={finishStyles.vacancyWrapper} vacancyId={vacancy.id}>
       <div className={finishStyles.descriptionVacancy}>
         <h2 className={finishStyles.title}>{vacancy.profession}</h2>
         <p className={finishStyles.descriptionWork}>
@@ -42,7 +42,7 @@ export const Vacancy: FC<VacancyPropsType> = ({ styles, vacancy }) => {
         </p>
       </div>
       <ActionIcon
-        onClick={e => setFavoriteHandler(e)}
+        onClick={setFavoriteHandler}
         data-elem={`vacancy-${vacancy.id}-shortlist-button`}
         className={
           favoriteVacancy === vacancy.id ? `${finishStyles.star} ${finishStyles.starActive}` : finishStyles.star
@@ -50,6 +50,6 @@ export const Vacancy: FC<VacancyPropsType> = ({ styles, vacancy }) => {
       >
         <StarIcon />
       </ActionIcon>
-    </NavLink>
+    </NavLinkContainer>
   )
 }
