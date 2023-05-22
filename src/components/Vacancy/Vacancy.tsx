@@ -19,14 +19,16 @@ type VacancyPropsType = {
 
 export const Vacancy: FC<VacancyPropsType> = ({ styles, vacancy, isLink }) => {
   const dispatch = useAppDispatch()
+
   const favoriteVacancy = useAppSelector(getFavorite).find(favorite => favorite.id === vacancy.id)?.id
+  const salary = salaryFork(vacancy.payment_from, vacancy.payment_to, vacancy.currency)
+  const finishStyles = styles ? styles : style
 
   const setFavoriteHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     dispatch(setFavorite(vacancy))
   }
-  const salary = salaryFork(vacancy.payment_from, vacancy.payment_to, vacancy.currency)
-  const finishStyles = styles ? styles : style
+
   return (
     <NavLinkContainer isLink={isLink} className={finishStyles.vacancyWrapper} vacancyId={vacancy.id}>
       <div className={finishStyles.descriptionVacancy}>

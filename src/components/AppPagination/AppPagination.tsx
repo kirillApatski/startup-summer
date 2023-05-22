@@ -21,6 +21,7 @@ const AppPagination: FC<AppPaginationType> = ({ className, total }) => {
   }
 
   const finishStyles = className ? className : ''
+
   return (
     <Pagination className={finishStyles} total={pageQuantity} value={currentPage! + 1} onChange={currentPageHandler} />
   )

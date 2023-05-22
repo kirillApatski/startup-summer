@@ -20,11 +20,13 @@ export const Favorite = () => {
   useEffect(() => {
     setCurrentVacancy(vacancyFavorite)
   }, [vacancyFavorite, vacancyFavorite.length])
+
   useEffect(() => {
     if (!vacancyFavorite.length) {
       navigate(PATH.EMPTY_STATE)
     }
   }, [navigate, vacancyFavorite])
+
   return (
     <div className={styles.favoriteWrapper}>
       {currentVacancy.slice(firstContentIndex, lastContentIndex).map(el => {

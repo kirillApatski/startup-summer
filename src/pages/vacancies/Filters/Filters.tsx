@@ -11,35 +11,44 @@ import { getVacancies, resetFilters, setFilters } from 'store/slices/vacanciesSl
 
 export const Filters = () => {
   const dispatch = useAppDispatch()
+
   const [filtersVacancies, setFiltersVacancies] = useState<FiltersType>({
     payment_from: null,
     payment_to: null,
     catalogues: null,
     no_agreement: null
   })
+
   const applyAFilters = () => {
     dispatch(setFilters(filtersVacancies))
     dispatch(getVacancies())
   }
+
   const resetAFilters = () => {
     dispatch(resetFilters())
+
     setFiltersVacancies({
       payment_from: null,
       payment_to: null,
       catalogues: null,
-      no_agreement: 0
+      no_agreement: null
     })
+
     dispatch(getVacancies())
   }
+
   const onSelectCategoryHandler = (category: number) => {
     setFiltersVacancies({ ...filtersVacancies, catalogues: category })
   }
+
   const onChangeSalaryToHandler = (salaryTo: number) => {
-    setFiltersVacancies({ ...filtersVacancies, payment_to: salaryTo })
+    setFiltersVacancies({ ...filtersVacancies, payment_to: salaryTo, no_agreement: 1 })
   }
+
   const onChangeSalaryFromHandler = (salaryFrom: number) => {
-    setFiltersVacancies({ ...filtersVacancies, payment_from: salaryFrom })
+    setFiltersVacancies({ ...filtersVacancies, payment_from: salaryFrom, no_agreement: 1 })
   }
+
   return (
     <div className={styles.filtersWrapper}>
       <div className={styles.filtersHeader}>

@@ -14,16 +14,20 @@ type SelectBoxPropsType = {
 export const SelectBox: FC<SelectBoxPropsType> = ({ onSelectCategory, value }) => {
   const dispatch = useAppDispatch()
   const catalogs = useAppSelector(getCatalogs)
+
   const dataSelect = catalogs.map(catalog => ({
     value: String(catalog.key),
     label: catalog.title
   }))
+
   const onSelectedHandler = (selectedItem: string) => {
     onSelectCategory(Number(selectedItem))
   }
+
   useEffect(() => {
     dispatch(getCatalogues())
   }, [dispatch])
+
   return (
     <Select
       data-elem='industry-select'

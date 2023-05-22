@@ -8,6 +8,7 @@ import { AppLoader } from 'components/AppLoader/AppLoader'
 
 export const JobBoard = () => {
   const dispatch = useAppDispatch()
+
   const vacancies = useAppSelector(getVacanciesState)
   const isLoading = useAppSelector(state => state.app.status === 'loading')
 

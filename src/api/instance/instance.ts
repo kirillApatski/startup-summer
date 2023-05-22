@@ -11,6 +11,7 @@ export const instance = axios.create({
 if (localStorage.getItem('auth')) {
   const tokenType = JSON.parse(localStorage.getItem('auth') || '').token_type
   const accessToken = localStorage.getItem('auth') && JSON.parse(localStorage.getItem('auth') || '').access_token
+
   instance.interceptors.request.use(request => {
     request.headers.Authorization = `${tokenType} ${accessToken}`
     return request

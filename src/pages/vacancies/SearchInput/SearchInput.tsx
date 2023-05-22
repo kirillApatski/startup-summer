@@ -10,6 +10,8 @@ export const SearchInput = () => {
   const [inputValue, setInputValue] = useState('')
 
   const onSearchVacancies = () => {
+    if (!inputValue) dispatch(setSearchVacancies({ keyword: null }))
+
     dispatch(setSearchVacancies({ keyword: inputValue }))
     dispatch(setPage(0))
     dispatch(getVacancies())
@@ -18,9 +20,11 @@ export const SearchInput = () => {
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.currentTarget.value)
   }
+
   const onKeyDownEnterHandler = (event: KeyboardEvent<HTMLInputElement>) => {
     event.key === 'Enter' && onSearchVacancies()
   }
+
   return (
     <Input
       data-elem='search-input'
