@@ -1,0 +1,30 @@
+@import 'src/styles/variables/variables';
+
+.emptyWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  text-align: center;
+  padding-top: 120px;
+  .imgContainer {
+    width: 240px;
+    > img {
+      width: 100%;
+    }
+  }
+  .emptyTitle {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+  }
+  .btnToSearchVacancies {
+    max-width: 164px;
+    width: 100%;
+    background-color: $blueColorLight;
+    color: $blueColorDark;
+    &:hover {
+      background-color: $hoverBlueColor;
+    }
+  }
+}
