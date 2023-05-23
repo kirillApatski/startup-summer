@@ -17,7 +17,7 @@ export const Vacancies = () => {
       <div className={styles.searchBoard}>
         <SearchInput />
         <JobBoard />
-        <AppPagination className={styles.pagination} total={totalCount} />
+        <AppPagination className={styles.pagination} total={totalCount === null ? 0 : totalCount} />
       </div>
     </div>
   )
