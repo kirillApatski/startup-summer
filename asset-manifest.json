@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/startup-summer/static/css/main.f53d4870.css",
-    "main.js": "/startup-summer/static/js/main.016850d8.js",
+    "main.css": "/startup-summer/static/css/main.034dd383.css",
+    "main.js": "/startup-summer/static/js/main.bfb0edd0.js",
     "static/js/787.b57fd1bc.chunk.js": "/startup-summer/static/js/787.b57fd1bc.chunk.js",
     "index.html": "/startup-summer/index.html",
-    "main.f53d4870.css.map": "/startup-summer/static/css/main.f53d4870.css.map",
-    "main.016850d8.js.map": "/startup-summer/static/js/main.016850d8.js.map",
+    "main.034dd383.css.map": "/startup-summer/static/css/main.034dd383.css.map",
+    "main.bfb0edd0.js.map": "/startup-summer/static/js/main.bfb0edd0.js.map",
     "787.b57fd1bc.chunk.js.map": "/startup-summer/static/js/787.b57fd1bc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f53d4870.css",
-    "static/js/main.016850d8.js"
+    "static/css/main.034dd383.css",
+    "static/js/main.bfb0edd0.js"
   ]
 }
