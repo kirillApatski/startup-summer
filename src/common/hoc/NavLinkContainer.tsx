@@ -13,7 +13,7 @@ export const NavLinkContainer: FC<NavLinkContainerPropsType> = ({ children, isLi
   return (
     <>
       {isLink ? (
-        <NavLink to={`${PATH.VACANCY_DETAILS}/${vacancyId}`} className={className}>
+        <NavLink to={`${PATH.VACANCY_DETAILS}/${vacancyId}`} data-elem={`vacancy-${vacancyId}`} className={className}>
           {children}
         </NavLink>
       ) : (
