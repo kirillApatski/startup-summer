@@ -7,10 +7,11 @@ import {
   vacanciesApi,
   VacanciesResponseType
 } from 'api/vacanciesApi'
+import { defaultCountPage } from 'common/constants/constants'
 
 const initialState: VacanciesResponseType & FilterAndSearchType = {
   objects: [],
-  total: 0,
+  total: null,
   published: 1,
   filters: {
     no_agreement: null,
@@ -19,7 +20,7 @@ const initialState: VacanciesResponseType & FilterAndSearchType = {
     catalogues: null
   },
   pagination: {
-    count: 4,
+    count: defaultCountPage,
     page: null
   },
   search: {
@@ -73,7 +74,11 @@ const vacanciesSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(getVacancies.fulfilled, (state, action) => {
       state.objects = action.payload.objects
-      state.total = action.payload.total
+      if (action.payload.total === 0) {
+        state.total = 0
+      } else {
+        state.total = action.payload.total
+      }
     })
   }
 })
