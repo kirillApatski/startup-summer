@@ -8,6 +8,7 @@ import { CustomInput } from 'pages/vacancies/Filters/CustomInput/CustomInput'
 import { FiltersType } from 'api/vacanciesApi'
 import { useAppDispatch } from 'common/hooks/hooks'
 import { getVacancies, resetFilters, setFilters } from 'store/slices/vacanciesSlice'
+import { inputStep } from 'common/constants/constants'
 
 export const Filters = () => {
   const dispatch = useAppDispatch()
@@ -36,17 +37,28 @@ export const Filters = () => {
 
     dispatch(getVacancies())
   }
-
   const onSelectCategoryHandler = (category: number) => {
-    setFiltersVacancies({ ...filtersVacancies, catalogues: category })
+    if (category === 0) {
+      setFiltersVacancies({ ...filtersVacancies, catalogues: null, no_agreement: null })
+    } else {
+      setFiltersVacancies({ ...filtersVacancies, catalogues: category, no_agreement: 1 })
+    }
   }
 
-  const onChangeSalaryToHandler = (salaryTo: number) => {
-    setFiltersVacancies({ ...filtersVacancies, payment_to: salaryTo, no_agreement: 1 })
+  const onChangeSalaryToHandler = (salaryTo: number | '') => {
+    if (salaryTo === '' || salaryTo === 0) {
+      setFiltersVacancies({ ...filtersVacancies, payment_to: null, no_agreement: null })
+    } else {
+      setFiltersVacancies({ ...filtersVacancies, payment_to: Number(salaryTo), no_agreement: 1 })
+    }
   }
 
-  const onChangeSalaryFromHandler = (salaryFrom: number) => {
-    setFiltersVacancies({ ...filtersVacancies, payment_from: salaryFrom, no_agreement: 1 })
+  const onChangeSalaryFromHandler = (salaryFrom: number | '') => {
+    if (salaryFrom === '' || salaryFrom === 0) {
+      setFiltersVacancies({ ...filtersVacancies, payment_from: null, no_agreement: null })
+    } else {
+      setFiltersVacancies({ ...filtersVacancies, payment_from: Number(salaryFrom), no_agreement: 1 })
+    }
   }
 
   return (
@@ -66,7 +78,7 @@ export const Filters = () => {
         customStyle={styles.inputNumber}
         placeholder='От'
         onChange={onChangeSalaryFromHandler}
-        step={500}
+        step={inputStep}
         min={0}
       />
       <CustomInput
@@ -75,8 +87,8 @@ export const Filters = () => {
         customStyle={styles.inputNumber}
         placeholder='До'
         onChange={onChangeSalaryToHandler}
-        step={500}
-        min={filtersVacancies.payment_from ? Number(filtersVacancies.payment_from) : 500}
+        step={inputStep}
+        min={filtersVacancies.payment_from ? Number(filtersVacancies.payment_from) : 0}
       />
       <Button data-elem='search-button' className={styles.buttonApply} onClick={applyAFilters}>
         Применить
