@@ -31,7 +31,7 @@ export type PaginationType = {
 
 export type VacanciesResponseType = {
   objects: VacancyType[]
-  total: number
+  total: number | null
 }
 
 export type VacancyType = {
