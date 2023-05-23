@@ -37,6 +37,9 @@
             font-weight: 400;
             font-size: 16px;
             line-height: 20px;
+            &:hover {
+              color: $hoverBlueColor;
+            }
           }
           .active {
             font-weight: 500;
