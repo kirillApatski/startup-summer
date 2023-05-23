@@ -8,6 +8,7 @@ import { Pagination } from '@mantine/core'
 import styles from './Favorite.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { PATH } from 'common/enums/PATH'
+import { defaultCountPage } from 'common/constants/constants'
 
 export const Favorite = () => {
   const navigate = useNavigate()
@@ -15,7 +16,10 @@ export const Favorite = () => {
 
   const [currentVacancy, setCurrentVacancy] = useState<VacancyType[]>(vacancyFavorite)
 
-  const { totalPage, page, firstContentIndex, lastContentIndex, setPageHandler } = usePagination(4, vacancyFavorite)
+  const { totalPage, page, firstContentIndex, lastContentIndex, setPageHandler } = usePagination(
+    defaultCountPage,
+    vacancyFavorite
+  )
 
   useEffect(() => {
     setCurrentVacancy(vacancyFavorite)
