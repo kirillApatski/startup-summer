@@ -1,6 +1,6 @@
 export enum PATH {
-  SEARCH_VACANCIES = '/vacancy',
+  SEARCH_VACANCIES = '/vacancies',
   FAVORITE = '/favorite',
-  VACANCY_DETAILS = '/vacancy',
+  VACANCY_DETAILS = '/vacancies',
   EMPTY_STATE = '/empty-state'
 }
