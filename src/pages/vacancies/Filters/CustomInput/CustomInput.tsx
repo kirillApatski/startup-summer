@@ -1,5 +1,5 @@
 import React, { FC, useRef } from 'react'
-import { NumberInput, NumberInputHandlers } from '@mantine/core'
+import { NumberInput, NumberInputHandlers, NumberInputProps } from '@mantine/core'
 import { ArrowIcon } from 'assets/icons/ArrowIcon'
 import styles from './CustomInput.module.scss'
 
@@ -12,11 +12,12 @@ type CustomInputProps = {
   min: number
 }
 
-export const CustomInput: FC<CustomInputProps> = ({ placeholder, customStyle, onChange, value, min, step }) => {
+export const CustomInput = (props: NumberInputProps & CustomInputProps) => {
+  const { placeholder, customStyle, onChange, value, min, step, ...rest } = props
   const handlers = useRef<NumberInputHandlers>()
 
   const onChangeHandler = (inputValue: number) => {
-    onChange(inputValue)
+    props.onChange(inputValue)
   }
 
   const incrementHandler = () => {
@@ -28,6 +29,7 @@ export const CustomInput: FC<CustomInputProps> = ({ placeholder, customStyle, on
 
   return (
     <NumberInput
+      {...rest}
       type='number'
       hideControls
       value={value ? value : ''}
