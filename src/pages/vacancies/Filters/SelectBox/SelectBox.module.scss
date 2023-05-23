@@ -9,13 +9,11 @@
     &:hover {
       border: 1px solid $hoverBlueColor;
     }
-    .item {
-      &:hover {
-        background-color: $hoverBlueColor;
-      }
-    }
-    .dropdown[data-selected] {
-      background-color: $blueColor;
+  }
+  .dropDowOpen {
+    transform: rotate(180deg);
+    path {
+      stroke: $hoverBlueColor;
     }
   }
 }

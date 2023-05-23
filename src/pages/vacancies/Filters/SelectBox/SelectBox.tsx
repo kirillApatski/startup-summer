@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { ArrowIcon } from 'assets/icons/ArrowIcon'
 import { Select } from '@mantine/core'
 import styles from './SelectBox.module.scss'
@@ -14,6 +14,8 @@ type SelectBoxPropsType = {
 export const SelectBox: FC<SelectBoxPropsType> = ({ onSelectCategory, value }) => {
   const dispatch = useAppDispatch()
   const catalogs = useAppSelector(getCatalogs)
+
+  const [isDropdown, setIsDropdown] = useState(false)
 
   const dataSelect = catalogs.map(catalog => ({
     value: String(catalog.key),
@@ -36,8 +38,10 @@ export const SelectBox: FC<SelectBoxPropsType> = ({ onSelectCategory, value }) =
       placeholder='Выберете отрасль'
       styles={{ rightSection: { pointerEvents: 'none' } }}
       data={dataSelect}
+      onDropdownOpen={() => setIsDropdown(true)}
+      onDropdownClose={() => setIsDropdown(false)}
       onChange={onSelectedHandler}
-      rightSection={<ArrowIcon />}
+      rightSection={<ArrowIcon className={isDropdown ? styles.dropDowOpen : undefined} />}
       rightSectionWidth={36}
     />
   )
