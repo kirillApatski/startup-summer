@@ -26,6 +26,12 @@ export const SelectBox: FC<SelectBoxPropsType> = ({ onSelectCategory, value }) =
     onSelectCategory(Number(selectedItem))
   }
 
+  const selectStyles = {
+    rightSection: styles.rightSection,
+    item: styles.selectItem,
+    itemsWrapper: styles.wrapperItems
+  }
+
   useEffect(() => {
     dispatch(getCatalogues())
   }, [dispatch])
@@ -33,10 +39,11 @@ export const SelectBox: FC<SelectBoxPropsType> = ({ onSelectCategory, value }) =
   return (
     <Select
       data-elem='industry-select'
+      allowDeselect
       value={String(value)}
       className={styles.select}
       placeholder='Выберете отрасль'
-      styles={{ rightSection: { pointerEvents: 'none' } }}
+      classNames={selectStyles}
       data={dataSelect}
       onDropdownOpen={() => setIsDropdown(true)}
       onDropdownClose={() => setIsDropdown(false)}
