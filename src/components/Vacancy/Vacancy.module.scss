@@ -56,6 +56,9 @@
     > svg > path {
       stroke: $blueColor;
       fill: $blueColor;
+      &:hover {
+        fill: $hoverBlueColor;
+      }
     }
   }
 }
