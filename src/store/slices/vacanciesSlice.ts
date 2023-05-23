@@ -57,6 +57,9 @@ const vacanciesSlice = createSlice({
     setSearchVacancies(state, action: PayloadAction<SearchVacanciesType>) {
       state.search.keyword = action.payload.keyword
     },
+    setTotal(state, action: PayloadAction<null>) {
+      state.total = action.payload
+    },
     setFilters(state, action: PayloadAction<FiltersType>) {
       state.filters.catalogues = action.payload.catalogues
       state.filters.payment_from = action.payload.payment_from
@@ -84,4 +87,4 @@ const vacanciesSlice = createSlice({
 })
 
 export const vacanciesReducer = vacanciesSlice.reducer
-export const { setPage, setFilters, setSearchVacancies, resetFilters } = vacanciesSlice.actions
+export const { setTotal, setPage, setFilters, setSearchVacancies, resetFilters } = vacanciesSlice.actions

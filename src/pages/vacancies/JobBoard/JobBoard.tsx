@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Vacancy } from 'components/Vacancy/Vacancy'
 import { useAppDispatch, useAppSelector } from 'common/hooks/hooks'
 import { getTotalCount, getVacanciesState } from 'store/selectors/VacanciesSelectors'
-import { getVacancies } from 'store/slices/vacanciesSlice'
+import { getVacancies, resetFilters, setTotal } from 'store/slices/vacanciesSlice'
 import styles from './JobBoard.module.scss'
 import { AppLoader } from 'components/AppLoader/AppLoader'
 import { useNavigate } from 'react-router-dom'
@@ -19,10 +19,13 @@ export const JobBoard = () => {
   useEffect(() => {
     dispatch(getVacancies())
   }, [dispatch])
-
-  if (totalCount === 0) {
-    navigate(PATH.EMPTY_STATE)
-  }
+  useEffect(() => {
+    if (totalCount === 0) {
+      navigate(PATH.EMPTY_STATE)
+      dispatch(resetFilters())
+      dispatch(setTotal(null))
+    }
+  }, [dispatch, navigate, totalCount])
 
   return (
     <div className={styles.wrapper}>
