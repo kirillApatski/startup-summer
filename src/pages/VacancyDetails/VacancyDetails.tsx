@@ -15,6 +15,11 @@ export const VacancyDetails = () => {
     setDataToLocalStorage('vacancy', JSON.stringify(vacancy))
   }, [vacancy])
 
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [])
   return (
     <div className={styles.wrapper}>
       <Vacancy isLink={false} styles={styles} vacancy={vacancy!} />
