@@ -9,13 +9,17 @@ import { AppLoader } from 'components/AppLoader/AppLoader'
 
 export const App = () => {
   const dispatch = useAppDispatch()
+
   const isInitialized = useAppSelector(getIsInitialized)
+
   useEffect(() => {
     dispatch(authMe())
   }, [dispatch])
+
   if (isInitialized) {
     return <AppLoader />
   }
+
   return (
     <>
       <Header />
