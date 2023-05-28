@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authApi, AuthResponseType } from 'api/authApi'
 import { setIsInitialized } from 'store/slices/appSlice'
-import { setDataToLocalStorage } from 'utils/localStorage'
+import { getDataToLocalStorage, setDataToLocalStorage } from 'utils/localStorage'
 import { createAppAsyncThunk } from 'utils/create-app-async-thunk'
 
 const initState = {
@@ -11,9 +11,9 @@ const initState = {
   token_type: '',
   expires_in: 0
 }
-const accessToken = localStorage.getItem('auth') && JSON.parse(localStorage.getItem('auth') || '').access_token
-const refreshToken = localStorage.getItem('auth') && JSON.parse(localStorage.getItem('auth') || '').refresh_token
-const ttl = localStorage.getItem('auth') && JSON.parse(localStorage.getItem('auth') || '').ttl
+const accessToken = getDataToLocalStorage('auth') && getDataToLocalStorage('auth').access_token
+const refreshToken = getDataToLocalStorage('auth') && getDataToLocalStorage('auth').refresh_token
+const ttl = getDataToLocalStorage('auth') && getDataToLocalStorage('auth').ttl
 
 export const authMe = createAppAsyncThunk('auth/authMe', async (_, { dispatch, rejectWithValue }) => {
   try {
