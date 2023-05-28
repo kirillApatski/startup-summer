@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { VacancyType } from 'api/vacanciesApi'
-import { setDataToLocalStorage } from 'utils/localStorage'
+import { getDataToLocalStorage, setDataToLocalStorage } from 'utils/localStorage'
 
 const favoriteSlice = createSlice({
   name: 'favorite',
-  initialState: JSON.parse(localStorage.getItem('favorite') || '[]') as VacancyType[],
+  initialState: (getDataToLocalStorage('favorite') as VacancyType[]) || [],
   reducers: {
     setFavorite(state, action: PayloadAction<VacancyType>) {
       const vacancyIndex = state.findIndex(vacancy => vacancy.id === action.payload.id)
