@@ -4,11 +4,12 @@ import { useAppSelector } from 'common/hooks/hooks'
 import { useParams } from 'react-router-dom'
 import { getDataToLocalStorage, setDataToLocalStorage } from 'utils/localStorage'
 import styles from './VacancyDetails.module.scss'
+import { getVacancyState } from 'store/selectors/VacanciesSelectors'
 
 export const VacancyDetails = () => {
   const { id } = useParams()
 
-  let vacancy = useAppSelector(state => state.vacancies.objects.find(vacancy => vacancy.id === Number(id)))
+  let vacancy = useAppSelector(state => getVacancyState(state, Number(id)))
   vacancy = vacancy ? vacancy : getDataToLocalStorage('vacancy')
 
   useEffect(() => {

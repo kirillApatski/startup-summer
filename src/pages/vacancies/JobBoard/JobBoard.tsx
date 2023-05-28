@@ -7,13 +7,14 @@ import styles from './JobBoard.module.scss'
 import { AppLoader } from 'components/AppLoader/AppLoader'
 import { useNavigate } from 'react-router-dom'
 import { PATH } from 'common/enums/PATH'
+import { getIsLoading } from 'store/selectors/appSelectors'
 
 export const JobBoard = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const vacancies = useAppSelector(getVacanciesState)
-  const isLoading = useAppSelector(state => state.app.status === 'loading')
+  const isLoading = useAppSelector(getIsLoading)
   const totalCount = useAppSelector(getTotalCount)
 
   useEffect(() => {
