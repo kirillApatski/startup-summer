@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { getVacancies } from 'store/slices/vacanciesSlice'
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
@@ -26,23 +27,16 @@ const appSlice = createSlice({
     }
   },
   extraReducers: builder => {
-    builder
-      .addMatcher(
-        action => {
-          return action.type.endsWith('/pending')
-        },
-        state => {
-          state.status = 'loading'
-        }
-      )
-      .addMatcher(
-        action => {
-          return action.type.endsWith('/fulfilled')
-        },
-        state => {
-          state.status = 'succeeded'
-        }
-      )
+    builder.addCase(getVacancies.pending, state => {
+      state.status = 'loading'
+    })
+    builder.addCase(getVacancies.fulfilled, state => {
+      state.status = 'succeeded'
+    })
+    builder.addCase(getVacancies.rejected, (state, action) => {
+      if (action.error.message) state.error = action.error.message
+      state.status = 'failed'
+    })
   }
 })
 
