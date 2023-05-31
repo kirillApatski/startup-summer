@@ -22,9 +22,8 @@ export const authMe = createAppAsyncThunk('auth/authMe', async (_, { dispatch, r
       const res = await authApi.passwordAuth()
       dispatch(setAuthData(res.data))
       setDataToLocalStorage('auth', JSON.stringify(res.data))
-    } else if (ttl * 1000 < Date.now()) {
+    } else if (ttl < Date.now()) {
       dispatch(setIsInitialized({ isInitialized: true }))
-      debugger
       dispatch(authRefreshToken(refreshToken))
     }
   } catch (error) {
