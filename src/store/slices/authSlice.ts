@@ -15,7 +15,7 @@ const initState = {
 const accessToken = getDataToLocalStorage('auth') && getDataToLocalStorage('auth').access_token
 const refreshToken = getDataToLocalStorage('auth') && getDataToLocalStorage('auth').refresh_token
 const ttl = getDataToLocalStorage('auth') && getDataToLocalStorage('auth').ttl
-console.log(ttl)
+
 export const authMe = createAppAsyncThunk('auth/authMe', async (_, { dispatch, rejectWithValue }) => {
   try {
     if (!accessToken) {
