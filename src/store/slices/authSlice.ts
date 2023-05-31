@@ -11,18 +11,20 @@ const initState = {
   token_type: '',
   expires_in: 0
 }
+
 const accessToken = getDataToLocalStorage('auth') && getDataToLocalStorage('auth').access_token
 const refreshToken = getDataToLocalStorage('auth') && getDataToLocalStorage('auth').refresh_token
 const ttl = getDataToLocalStorage('auth') && getDataToLocalStorage('auth').ttl
-
+console.log(ttl)
 export const authMe = createAppAsyncThunk('auth/authMe', async (_, { dispatch, rejectWithValue }) => {
   try {
     if (!accessToken) {
       const res = await authApi.passwordAuth()
       dispatch(setAuthData(res.data))
       setDataToLocalStorage('auth', JSON.stringify(res.data))
-    } else if (ttl * 1000 > Date.now()) {
+    } else if (ttl * 1000 < Date.now()) {
       dispatch(setIsInitialized({ isInitialized: true }))
+      debugger
       dispatch(authRefreshToken(refreshToken))
     }
   } catch (error) {
