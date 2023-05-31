@@ -39,6 +39,7 @@ export const authRefreshToken = createAppAsyncThunk(
     try {
       const res = await authApi.refreshToken(refreshToken)
       dispatch(setAuthData(res.data))
+      setDataToLocalStorage('auth', JSON.stringify(res.data))
     } catch (error) {
       return rejectWithValue(error)
     } finally {
